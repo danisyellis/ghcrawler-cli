@@ -24,9 +24,9 @@ The available commands are:
 
  `stop` -- Stop crawler processing. The crawler service is left running but it stops pulling requests off the queue.  This is the same as `start 0`.
 
- `queue <requests...>` -- Queues the given requests for processing. The requests parameter is a list of GitHub "org" and/or "org/repo" names.
+ `queue <requests...>` -- Queues the given requests for processing. The requests parameter is a list of GitHub "${org}" and/or "${org}/${repo}" and/or "user/${user}" names.
 
-`orgs <org orgs...>` -- Set the crawler's to traverse only the GitHub orgs named in the given list.
+`orgs <org orgs...>` -- Set the crawler to traverse only the GitHub orgs named in the given list.
 
 `config` -- Dumps the crawler service's configuration to the console.
 
