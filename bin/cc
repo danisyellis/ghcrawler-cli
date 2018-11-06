@@ -15,8 +15,10 @@ const crawlerClient = new CrawlerClient();
 let promise = Q();
 
 const commands = getCommands();
-if (!process.argv.slice(2).length) {
-  commands.help();
+if (require.main === module) {
+  if (!process.argv.slice(2).length) {
+    commands.help();
+  }
 }
 commands.parse(process.argv);
 promise.then(() => {
@@ -139,6 +141,7 @@ function getTokens() {
 }
 
 function queueRequests(specs, options) {
+  if (!options) {options = {}}   //when I queue without the command line, I don't make this options object. Do I ever need it?
   let requests = Array.isArray(specs) ? specs : [specs];
   requests = requests.map(request => request.trim().startsWith('{') ? JSON.parse(request) : request);
   promise = crawlerClient.queueRequests(requests, options.queue).then(() => console.log(`Queued ${requests.length} requests`));
@@ -255,3 +258,5 @@ function createEventRequest(line) {
     return null;
   }
 }
+
+module.exports = queueRequests;
